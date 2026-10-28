@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-800">
+
+    <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <header class="mb-4">
+            <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                My Tasks <span class="mt-2 text-m text-slate-500 sm:text-base">
+                    Plan your day, manage your tasks, and get things done.
+                </span>
+            </h1>
+        </header>
+
+        <!-- Search and Notes Count -->
+        <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="w-full sm:max-w-md">
+                <input type="text" id="search" placeholder="Search by title or description..."
+                    class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100">
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 text-sm text-slate-600">
+                <div id="notes-count" class="rounded-lg border border-slate-200 bg-white px-4 py-2">
+                    Total notes: 0
+                </div>
+                <div id="showing-notes-count" class="rounded-lg border border-slate-200 bg-white px-4 py-2">
+                    Showing notes: 0
+                </div>
+            </div>
+        </div>
+
+        <!-- Two-column layout -->
+        <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+
+            <!-- Left: Create Note -->
+            <section class="rounded-2xl border border-slate-200 bg-white p-2 shadow-sm sm:p-3">
+
+                <h2 class="mb-5 text-xl font-semibold text-slate-900">
+                    Create a new note
+                </h2>
+
+                <form onsubmit="return validateForm(event)" class="space-y-2">
+
+                    <div>
+                        <label for="title" class="mb-2 block text-sm font-medium text-slate-700">
+                            Title
+                        </label>
+                        <input type="text" id="title" name="title" placeholder="e.g. Complete project report" required
+                            class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100">
+                    </div>
+
+                    <div>
+                        <label for="text-area" class="mb-2 block text-sm font-medium text-slate-700">
+                            Description
+                        </label>
+                        <textarea id="text-area" name="text-area" rows="3" placeholder="Write your notes here..."
+                            required
+                            class="w-full resize-y rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="date" class="mb-2 block text-sm font-medium text-slate-700">
+                            Due date
+                        </label>
+                        <input type="date" id="date" name="date" required
+                            class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700 active:scale-[0.99] focus:outline-none focus:ring-4 focus:ring-blue-200">
+                        + Add Note
+                    </button>
+
+                </form>
+            </section>
+
+            <!-- Right: Notes List -->
+            <section class="min-w-0">
+                <div class="mb-4 flex items-center justify-between gap-3">
+                    <h2 class="text-xl font-semibold text-slate-900">
+                        Your notes
+                    </h2>
+                    <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+                        Notes
+                    </span>
+                </div>
+
+                <ul id="messages" class="space-y-4"></ul>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js"
+        integrity="sha512-OVq+Gfa9PIjbTC0jWOccSFSp/vzkBQ5pMcbHQrNZLl+izmdFmusmAMlX4LT550ivvSnMXMEeG7CxEtjIz6Dn2Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
