@@ -8,6 +8,6 @@ app.get('/home/:username', (req, res) => {
     res.send(`Welcome, ${username}! Your role is: ${role}`);
 });
 
-app.listen(() => {
+app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
