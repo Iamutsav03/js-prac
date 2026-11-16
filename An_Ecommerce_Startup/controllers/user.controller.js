@@ -1,20 +1,34 @@
 const { users } = require("../data");
+const { sendErrorResponse, sendResponse } = require("../utils/response");
 
 const get_user = (req, res) => {
     const id = Number(req.params.id);
-    const user = users.find((u) => {
-        return u.id === id;
-    })
-    res.status(200).send(user || "user not found");
-}
+
+    const user = users.find((u) => u.id === id);
+
+    if (!user) {
+        return sendErrorResponse(res, {
+            message: "User not found",
+            statusCode: 404
+        });
+    }
+
+    return sendResponse(res, user, 200);
+};
 
 const get_all_users = (req, res) => {
     if (users.length === 0) {
-        return res.status(200).send("No users has been added");
+        return sendErrorResponse(res, {
+            message: "No users have been added",
+            statusCode: 404
+        });
     }
-    res.status(200).send(users);
-}
+
+    return sendResponse(res, users, 200);
+};
+
 let count = 0;
+
 const post_user = (req, res) => {
     const name = req.body.name;
 
@@ -27,12 +41,14 @@ const post_user = (req, res) => {
 
     users.push(newUser);
 
-    res.status(201).json({
+    return sendResponse(res, {
         message: "User added successfully",
         user: newUser
-    });
-}
+    }, 201);
+};
 
 module.exports = {
-    get_all_users, get_user, post_user
-}
+    get_all_users,
+    get_user,
+    post_user
+};

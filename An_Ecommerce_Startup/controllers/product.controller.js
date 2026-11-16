@@ -1,40 +1,76 @@
-
 const {
     get_product,
     get_all_product,
     post_product
 } = require("../services/productServices");
 
-// Get product by ID
+const {
+    sendErrorResponse,
+    sendResponse
+} = require("../utils/response");
+
+
 const get_product_controller = (req, res) => {
-    const id = Number(req.params.id);
+    try {
+        const id = Number(req.params.id);
 
-    const product = get_product(id);
+        const product = get_product(id);
 
-    res.status(200).send(product || "product not found");
-};
+        if (!product) {
+            return sendErrorResponse(res, {
+                message: "Product not found",
+                statusCode: 404
+            });
+        }
 
-// Get all products
-const get_all_product_controller = (req, res) => {
-    const products = get_all_product();
+        return sendResponse(res, product, 200);
 
-    if (products.length === 0) {
-        return res.status(200).send("No products has been added");
+    } catch (err) {
+        return sendErrorResponse(res, {
+            message: err.message,
+            statusCode: 500
+        });
     }
-
-    res.status(200).send(products);
 };
 
-// Add product
+const get_all_product_controller = (req, res) => {
+    try {
+        const products = get_all_product();
+
+        if (products.length === 0) {
+            return sendErrorResponse(res, {
+                message: "No products have been added",
+                statusCode: 404
+            });
+        }
+
+        return sendResponse(res, products, 200);
+
+    } catch (err) {
+        return sendErrorResponse(res, {
+            message: err.message,
+            statusCode: 500
+        });
+    }
+};
+
 const post_product_controller = (req, res) => {
-    const product = req.body.product;
+    try {
+        const product = req.body.product;
 
-    const newproduct = post_product(product);
+        const newproduct = post_product(product);
 
-    res.status(201).json({
-        message: "product added successfully",
-        product: newproduct
-    });
+        return sendResponse(res, {
+            message: "Product added successfully",
+            product: newproduct
+        }, 201);
+
+    } catch (err) {
+        return sendErrorResponse(res, {
+            message: err.message,
+            statusCode: 500
+        });
+    }
 };
 
 module.exports = {
