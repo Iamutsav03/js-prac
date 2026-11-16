@@ -1,7 +1,25 @@
-const product = require('../data/products');
+const products = require('../data/products');
 
-function all_products() {
-    return product;
-}
+let count = 0;
 
-module.exports = {all_products};
+const getProducts = () => {
+    return products;
+};
+
+const addProduct = (productName) => {
+    count++;
+
+    const newProduct = {
+        id: count,
+        productName: productName
+    };
+
+    products.push(newProduct);
+
+    return newProduct;
+};
+
+module.exports = {
+    getProducts,
+    addProduct
+};

@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Product</title>
 </head>
-<body>
-    <h1>NO PRODUCT IS LISTED</h1>
+
+<body style="font-family: Arial; background-color: #f4f4f4; padding: 40px;">
+
+    <div style="background: white; padding: 25px; width: 350px; margin: auto; border-radius: 8px;">
+
+        <h2 style="text-align: center; color: #333;">
+            PLEASE ADD A NEW PRODUCT
+        </h2>
+
+        <form action="/product" method="POST">
+
+            <label for="product" style="display: block; margin-bottom: 8px;">
+                Product Name:
+            </label>
+
+            <input id="product" name="productName" type="text" placeholder="Enter product name" required
+                style="width: 95%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+
+            <button type="submit"
+                style="width: 100%; padding: 10px; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                Add Product
+            </button>
+
+        </form>
+    </div>
+
 </body>
+
 </html>
