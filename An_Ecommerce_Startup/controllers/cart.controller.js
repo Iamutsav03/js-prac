@@ -1,4 +1,10 @@
+
 const { users, products, cart } = require("../data");
+
+const {
+    sendErrorResponse,
+    sendResponse
+} = require("../utils/response");
 
 const user_cart_details = (req, res) => {
     const user_id = Number(req.params.id);
@@ -6,42 +12,50 @@ const user_cart_details = (req, res) => {
     const user = users.find((u) => u.id === user_id);
 
     if (!user) {
-        return res.status(404).json({
-            message: "User not found"
+        return sendErrorResponse(res, {
+            message: "User not found",
+            statusCode: 404
         });
     }
 
     const userCart = cart.filter((u) => u.user_id === user_id);
+
     if (userCart.length === 0) {
-        return res.send("Cart is empty");
+        return sendResponse(res, null, {
+            message: "Cart is empty",
+            statusCode: 200
+        });
     }
 
-    res.status(200).json(userCart);
-}
+    return sendResponse(res, userCart, {
+        message: "Cart details fetched successfully",
+        statusCode: 200
+    });
+};
+
 
 const add_product_user_cart = (req, res) => {
     const user_id = Number(req.params.id);
     const product_id = Number(req.body.product_id);
 
-    // Check user
     const user = users.find((u) => u.id === user_id);
 
     if (!user) {
-        return res.status(404).json({
-            message: "User not found"
+        return sendErrorResponse(res, {
+            message: "User not found",
+            statusCode: 404
         });
     }
 
-    // Check product
     const product = products.find((p) => p.id === product_id);
 
     if (!product) {
-        return res.status(404).json({
-            message: "Product not found"
+        return sendErrorResponse(res, {
+            message: "Product not found",
+            statusCode: 404
         });
     }
 
-    // Add product to cart
     const newItem = {
         user_id: user_id,
         product_id: product.id,
@@ -50,10 +64,14 @@ const add_product_user_cart = (req, res) => {
 
     cart.push(newItem);
 
-    res.status(201).json({
+    return sendResponse(res, newItem, {
         message: "Product added to cart successfully",
-        item: newItem
+        statusCode: 201
     });
-}
+};
 
-module.exports = { user_cart_details, add_product_user_cart };
+
+module.exports = {
+    user_cart_details,
+    add_product_user_cart
+};
