@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { get_all_product, get_product, post_product } = require('../controllers/product.controller');
+const { get_all_product_controller ,get_product_controller ,post_product_controller } = require('../controllers/product.controller');
 
 
-router.get('/', get_all_product);
-router.get('/:id', get_product);
-router.post('/', post_product);
+router.get('/', get_all_product_controller);
+router.get('/:id', get_product_controller);
+router.post('/', post_product_controller);
 
 module.exports = router;

@@ -2,7 +2,7 @@ const {
     get_product,
     get_all_product,
     post_product
-} = require("../services/productServices");
+} = require("../services/product.service");
 
 const {
     sendErrorResponse,

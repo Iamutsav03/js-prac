@@ -5,6 +5,8 @@ const productroute = require('../An_Ecommerce_Startup/routes/products.route');
 const userroute = require('../An_Ecommerce_Startup/routes/users.route');
 const cartroute = require('../An_Ecommerce_Startup/routes/cart.route');
 
+const db = require('../An_Ecommerce_Startup/database/db');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
