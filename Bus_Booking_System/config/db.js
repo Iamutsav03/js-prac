@@ -2,25 +2,25 @@
 const mysql = require('mysql2');
 
 const createTable = [
-    `CREATE TABLE Users (
+    `CREATE TABLE IF NOT EXISTS Users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(20) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE
     )`,
 
-    `CREATE TABLE Buses (
+    `CREATE TABLE IF NOT EXISTS c (
         id INT AUTO_INCREMENT PRIMARY KEY,
         busNumber VARCHAR(30) NOT NULL,
         totalSeats INT NOT NULL,
         availableSeats INT NOT NULL
     )`,
 
-    `CREATE TABLE Bookings (
+    `CREATE TABLE IF NOT EXISTS Bookings (
         id INT AUTO_INCREMENT PRIMARY KEY,
         seatNumber INT NOT NULL
     )`,
 
-    `CREATE TABLE Payments (
+    `CREATE TABLE IF NOT EXISTS Payments (
         id INT AUTO_INCREMENT PRIMARY KEY,
         amountPaid DECIMAL(10,2) NOT NULL,
         paymentStatus VARCHAR(30) NOT NULL
