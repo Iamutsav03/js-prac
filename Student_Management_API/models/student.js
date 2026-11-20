@@ -40,7 +40,7 @@ const Student = db.define(
   },
   {
     tableName: 'students',
-    timestamps: true,
+    timestamps: false,
     underscored: true
   }
 );
